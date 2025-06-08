@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "876737558960",
+    "firebase_url": "https://historical-quiz-ddb04-default-rtdb.firebaseio.com",
+    "project_id": "historical-quiz-ddb04",
+    "storage_bucket": "historical-quiz-ddb04.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876737558960:android:7fce1abb185a44c6ccfe75",
+        "android_client_info": {
+          "package_name": "com.muhammadadin.belajarsejarahpahlawanindonesia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDePp06SULYaZ-1Bg3ly9G-iwl8ShJjAxg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
