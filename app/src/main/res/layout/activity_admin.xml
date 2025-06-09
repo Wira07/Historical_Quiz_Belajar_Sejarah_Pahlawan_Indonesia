@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="#F5F5F5">
 
     <!-- Header -->
@@ -12,8 +13,7 @@
         android:background="#1976D2"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:padding="16dp"
-        android:id="@+id/header">
+        android:padding="16dp">
 
         <TextView
             android:layout_width="0dp"
@@ -46,12 +46,10 @@
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/header"
         android:layout_margin="16dp"
         android:columnCount="2"
         android:rowCount="2">
 
-        <!-- Manage Heroes -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardManageHeroes"
             android:layout_width="0dp"
@@ -62,21 +60,18 @@
             android:foreground="?attr/selectableItemBackground"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:padding="16dp">
-
                 <ImageView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/ic_hero"
                     android:layout_marginBottom="8dp"
                     android:contentDescription="Heroes" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -87,7 +82,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Manage Facts -->
+        <!-- Card for Facts Management -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardManageFacts"
             android:layout_width="0dp"
@@ -98,21 +93,18 @@
             android:foreground="?attr/selectableItemBackground"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:padding="16dp">
-
                 <ImageView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/ic_fact"
                     android:layout_marginBottom="8dp"
                     android:contentDescription="Facts" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -123,7 +115,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Manage Quiz -->
+        <!-- Card for Quizzes Management -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardManageQuiz"
             android:layout_width="0dp"
@@ -134,21 +126,18 @@
             android:foreground="?attr/selectableItemBackground"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:padding="16dp">
-
                 <ImageView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/ic_quiz"
                     android:layout_marginBottom="8dp"
                     android:contentDescription="Quiz" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -159,7 +148,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Manage Users -->
+        <!-- Card for Users Management -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewUsers"
             android:layout_width="0dp"
@@ -170,21 +159,18 @@
             android:foreground="?attr/selectableItemBackground"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:padding="16dp">
-
                 <ImageView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/ic_users"
                     android:layout_marginBottom="8dp"
                     android:contentDescription="Users" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -197,4 +183,5 @@
 
     </GridLayout>
 
-</RelativeLayout>
+
+</LinearLayout>

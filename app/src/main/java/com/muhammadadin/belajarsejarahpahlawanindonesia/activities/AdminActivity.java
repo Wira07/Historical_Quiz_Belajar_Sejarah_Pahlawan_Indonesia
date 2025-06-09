@@ -2,16 +2,15 @@ package com.muhammadadin.belajarsejarahpahlawanindonesia.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.muhammadadin.belajarsejarahpahlawanindonesia.R;
 import com.muhammadadin.belajarsejarahpahlawanindonesia.databinding.ActivityAdminBinding;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class AdminActivity extends AppCompatActivity {
 
@@ -26,53 +25,49 @@ public class AdminActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        // Apply click listeners for each admin button
+        // Setup click listeners for each admin button
         setupClickListeners();
-
-        // Load admin data
-        loadAdminData();
+        setupLogout();
     }
 
-
     private void setupClickListeners() {
-        // Handle logout click
-        binding.btnLogout.setOnClickListener(v -> logout());
-
-        // Handle other admin menu clicks
         binding.cardManageHeroes.setOnClickListener(v -> manageHeroes());
         binding.cardManageFacts.setOnClickListener(v -> manageFacts());
         binding.cardManageQuiz.setOnClickListener(v -> manageQuizzes());
         binding.cardViewUsers.setOnClickListener(v -> manageUsers());
     }
 
-    private void loadAdminData() {
-        // Retrieve admin data to display in the Admin Panel
-        // You can load data here if needed, e.g., admin's name or role.
+    private void setupLogout() {
+        // Logout ketika tombol logout ditekan
+        binding.btnLogout.setOnClickListener(v -> logout());
     }
 
     private void manageHeroes() {
         Toast.makeText(this, "Mengelola Pahlawan", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(AdminActivity.this, ManageHeroesActivity.class));
     }
 
     private void manageFacts() {
         Toast.makeText(this, "Mengelola Fakta", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(AdminActivity.this, ManageFactsActivity.class));
     }
 
     private void manageQuizzes() {
         Toast.makeText(this, "Mengelola Kuis", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(AdminActivity.this, ManageQuizzesActivity.class));
     }
 
     private void manageUsers() {
         Toast.makeText(this, "Mengelola Pengguna", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(AdminActivity.this, ManageUsersActivity.class));
     }
 
-    // Logout method
     private void logout() {
-        mAuth.signOut(); // Sign out from Firebase
-        Intent intent = new Intent(AdminActivity.this, LoginActivity.class); // Navigate to LoginActivity
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear previous activities from the stack
+        mAuth.signOut(); // Sign out dari Firebase
+        Toast.makeText(this, "Berhasil logout", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(AdminActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish(); // Close AdminActivity
+        finish(); // Tutup AdminActivity
     }
-
 }

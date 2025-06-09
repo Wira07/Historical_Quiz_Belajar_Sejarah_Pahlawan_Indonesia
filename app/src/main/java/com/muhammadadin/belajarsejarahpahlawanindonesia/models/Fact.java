@@ -7,8 +7,17 @@ public class Fact {
     private String content;
     private boolean isDiscovered;
 
-    public Fact() {} // Required for Firebase
+    // Default constructor for Firebase
+    public Fact() {}
 
+    // Constructor for title and content (used in your activity)
+    public Fact(String title, String content) {
+        this.title = title;
+        this.content = content;
+        this.isDiscovered = false; // Default value
+    }
+
+    // Constructor that accepts all fields (you can still use this if needed)
     public Fact(String id, String heroId, String title, String content) {
         this.id = id;
         this.heroId = heroId;

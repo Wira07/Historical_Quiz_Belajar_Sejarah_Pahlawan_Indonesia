@@ -13,6 +13,18 @@
         android:theme="@style/Theme.HistoricalQuizBelajarSejarahPahlawanIndonesia"
         tools:targetApi="31">
         <activity
+            android:name=".activities.ManageUsersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ManageQuizzesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ManageFactsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ManageHeroesActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ProfileAdminActivity"
             android:exported="false" />
         <activity
