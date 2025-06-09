@@ -1,180 +1,476 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F5F5F5">
+    android:background="@drawable/background_gradient">
 
-    <!-- Header -->
-    <LinearLayout
+    <!-- Beautiful Header with Gradient -->
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="#2E7D32"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="16dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Historical Quiz"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+        android:layout_height="100dp"
+        app:cardElevation="12dp"
+        app:cardCornerRadius="0dp"
+        android:layout_marginBottom="2dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/header_gradient"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="20dp">
 
-            <TextView
-                android:id="@+id/tvUserName"
+            <!-- App Icon -->
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_history_book"
+                android:layout_marginEnd="12dp"
+                android:contentDescription="History Icon" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Historical Quiz"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins_bold"
+                    android:letterSpacing="0.05" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jelajahi Sejarah Indonesia"
+                    android:textColor="#E8F5E8"
+                    android:textSize="12sp"
+                    android:alpha="0.9" />
+            </LinearLayout>
+
+            <!-- User Info Card -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Student Name"
-                android:textColor="@android:color/white"
-                android:textSize="14sp" />
+                app:cardBackgroundColor="#33FFFFFF"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp"
+                android:layout_marginEnd="8dp">
 
-            <TextView
-                android:id="@+id/tvPoints"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Points: 0"
-                android:textColor="@android:color/white"
-                android:textSize="12sp" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/tvUserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Student Name"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="2dp">
+
+                        <ImageView
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:src="@drawable/ic_star"
+                            android:layout_marginEnd="4dp" />
+
+                        <TextView
+                            android:id="@+id/tvPoints"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0 Points"
+                            android:textColor="#FFD700"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Logout Button -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:cardBackgroundColor="#33FFFFFF"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="4dp">
+
+                <ImageView
+                    android:id="@+id/btnLogout"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_logout"
+                    android:contentDescription="Logout"
+                    android:background="?attr/selectableItemBackgroundBorderless" />
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-        <ImageView
-            android:id="@+id/btnLogout"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/ic_logout"
-            android:contentDescription="Logout"
-            android:background="?attr/selectableItemBackgroundBorderless" />
-    </LinearLayout>
-
-    <!-- Navigation Tabs -->
-    <LinearLayout
+    <!-- Beautiful Navigation Tabs -->
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:orientation="horizontal"
-        android:background="@android:color/white"
-        android:elevation="2dp">
+        android:layout_height="wrap_content"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="0dp"
+        android:layout_marginBottom="8dp">
 
-        <Button
-            android:id="@+id/btnTabGallery"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Galeri"
-            android:background="?attr/selectableItemBackground"
-            android:textColor="#2E7D32"
-            style="@style/Widget.MaterialComponents.Button.TextButton" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:orientation="horizontal"
+            android:background="@android:color/white"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="8dp">
 
-        <Button
-            android:id="@+id/btnTabQuiz"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Kuis"
-            android:background="?attr/selectableItemBackground"
-            android:textColor="#666666"
-            style="@style/Widget.MaterialComponents.Button.TextButton" />
+            <!-- Gallery Tab -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardTabGallery"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                app:cardBackgroundColor="@color/tab_active_color"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="6dp">
 
-        <Button
-            android:id="@+id/btnTabFacts"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Fakta"
-            android:background="?attr/selectableItemBackground"
-            android:textColor="#666666"
-            style="@style/Widget.MaterialComponents.Button.TextButton" />
-    </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/btnTabGallery"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:background="?attr/selectableItemBackground"
+                    android:padding="8dp">
 
-    <!-- Content Area -->
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_gallery"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Galeri"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Quiz Tab -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardTabQuiz"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="4dp"
+                app:cardBackgroundColor="#F0F0F0"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:id="@+id/btnTabQuiz"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:background="?attr/selectableItemBackground"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_quiz"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kuis"
+                        android:textColor="#666666"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Facts Tab -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardTabFacts"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="4dp"
+                app:cardBackgroundColor="#F0F0F0"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:id="@+id/btnTabFacts"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:background="?attr/selectableItemBackground"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_facts"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fakta"
+                        android:textColor="#666666"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Content Area with Beautiful Background -->
     <FrameLayout
         android:id="@+id/contentFrame"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="@drawable/content_background">
 
-        <!-- Gallery RecyclerView -->
+        <!-- Gallery RecyclerView with Linear Layout Manager (Single Column) -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewHeroes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="8dp"
-            android:visibility="visible" />
+            android:padding="16dp"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical" />
 
-        <!-- Quiz Layout -->
-        <LinearLayout
+        <!-- Beautiful Quiz Layout -->
+        <ScrollView
             android:id="@+id/layoutQuiz"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:padding="16dp"
-            android:visibility="gone">
+            android:visibility="gone"
+            android:fillViewport="true">
 
-            <TextView
-                android:id="@+id/tvQuizQuestion"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Pertanyaan akan muncul di sini"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="24dp" />
+                android:orientation="vertical">
 
-            <RadioGroup
-                android:id="@+id/radioGroupOptions"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp">
-
-                <RadioButton
-                    android:id="@+id/radioOption1"
+                <!-- Question Card -->
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="Option 1" />
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="8dp"
+                    android:layout_marginBottom="20dp">
 
-                <RadioButton
-                    android:id="@+id/radioOption2"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="24dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="16dp">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:src="@drawable/ic_question"
+                                android:layout_marginEnd="12dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Pertanyaan"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="#2E7D32" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvQuizQuestion"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Pertanyaan akan muncul di sini"
+                            android:textSize="18sp"
+                            android:textColor="#333333"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Options Container -->
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="Option 2" />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="24dp">
 
-                <RadioButton
-                    android:id="@+id/radioOption3"
+                    <!-- Option 1 -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardOption1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@android:color/white"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="4dp"
+                        android:layout_marginBottom="12dp">
+
+                        <RadioButton
+                            android:id="@+id/radioOption1"
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:text="Option 1"
+                            android:textSize="16sp"
+                            android:textColor="#333333"
+                            android:padding="20dp"
+                            android:background="?attr/selectableItemBackground" />
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Option 2 -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardOption2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@android:color/white"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="4dp"
+                        android:layout_marginBottom="12dp">
+
+                        <RadioButton
+                            android:id="@+id/radioOption2"
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:text="Option 2"
+                            android:textSize="16sp"
+                            android:textColor="#333333"
+                            android:padding="20dp"
+                            android:background="?attr/selectableItemBackground" />
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Option 3 -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardOption3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@android:color/white"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="4dp"
+                        android:layout_marginBottom="12dp">
+
+                        <RadioButton
+                            android:id="@+id/radioOption3"
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:text="Option 3"
+                            android:textSize="16sp"
+                            android:textColor="#333333"
+                            android:padding="20dp"
+                            android:background="?attr/selectableItemBackground" />
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Option 4 -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardOption4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@android:color/white"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="4dp"
+                        android:layout_marginBottom="12dp">
+
+                        <RadioButton
+                            android:id="@+id/radioOption4"
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:text="Option 4"
+                            android:textSize="16sp"
+                            android:textColor="#333333"
+                            android:padding="20dp"
+                            android:background="?attr/selectableItemBackground" />
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <!-- Submit Button -->
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="Option 3" />
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="28dp"
+                    app:cardElevation="8dp"
+                    android:layout_marginBottom="20dp">
 
-                <RadioButton
-                    android:id="@+id/radioOption4"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="Option 4" />
-            </RadioGroup>
+                    <Button
+                        android:id="@+id/btnSubmitAnswer"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:text="Submit Jawaban"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"
+                        android:background="@drawable/button_gradient"
+                        android:elevation="0dp"
+                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton" />
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </ScrollView>
 
-            <Button
-                android:id="@+id/btnSubmitAnswer"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="Submit Jawaban"
-                style="@style/Widget.MaterialComponents.Button" />
-        </LinearLayout>
-
-        <!-- Facts RecyclerView -->
+        <!-- Facts RecyclerView (Single Column) -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewFacts"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="8dp"
-            android:visibility="gone" />
+            android:padding="16dp"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical" />
 
     </FrameLayout>
+
+    <!-- Floating Action Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabHelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_help"
+        app:tint="@android:color/white"
+        app:backgroundTint="#FF6B35"
+        app:elevation="8dp"
+        android:contentDescription="Help" />
 
 </LinearLayout>

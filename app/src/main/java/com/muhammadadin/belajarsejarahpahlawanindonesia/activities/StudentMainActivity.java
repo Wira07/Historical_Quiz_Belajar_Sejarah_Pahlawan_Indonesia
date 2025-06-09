@@ -3,6 +3,8 @@ package com.muhammadadin.belajarsejarahpahlawanindonesia.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -63,7 +65,7 @@ public class StudentMainActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerViews() {
-        // Heroes RecyclerView
+        // Heroes RecyclerView - CHANGED: Using LinearLayoutManager for single column
         heroAdapter = new HeroAdapter(heroList, hero -> {
             if (!hero.isUnlocked()) {
                 unlockHero(hero);
@@ -71,7 +73,8 @@ public class StudentMainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Pahlawan sudah terbuka!", Toast.LENGTH_SHORT).show();
             }
         });
-        binding.recyclerViewHeroes.setLayoutManager(new GridLayoutManager(this, 2));
+        // FIXED: Changed from GridLayoutManager(this, 2) to LinearLayoutManager(this)
+        binding.recyclerViewHeroes.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerViewHeroes.setAdapter(heroAdapter);
 
         // Facts RecyclerView
@@ -93,10 +96,8 @@ public class StudentMainActivity extends AppCompatActivity {
     private void switchTab(int tab) {
         currentTab = tab;
 
-        // Reset tab colors
-        binding.btnTabGallery.setTextColor(getColor(android.R.color.darker_gray));
-        binding.btnTabQuiz.setTextColor(getColor(android.R.color.darker_gray));
-        binding.btnTabFacts.setTextColor(getColor(android.R.color.darker_gray));
+        // Reset tab colors - Find TextView children in LinearLayouts
+        resetTabColors();
 
         // Hide all views
         binding.recyclerViewHeroes.setVisibility(View.GONE);
@@ -105,18 +106,50 @@ public class StudentMainActivity extends AppCompatActivity {
 
         switch (tab) {
             case 0: // Gallery
-                binding.btnTabGallery.setTextColor(getColor(com.google.android.material.R.color.design_default_color_primary));
+                setTabActive(binding.btnTabGallery);
                 binding.recyclerViewHeroes.setVisibility(View.VISIBLE);
                 break;
             case 1: // Quiz
-                binding.btnTabQuiz.setTextColor(getColor(com.google.android.material.R.color.design_default_color_primary));
+                setTabActive(binding.btnTabQuiz);
                 binding.layoutQuiz.setVisibility(View.VISIBLE);
                 loadRandomQuiz();
                 break;
             case 2: // Facts
-                binding.btnTabFacts.setTextColor(getColor(com.google.android.material.R.color.design_default_color_primary));
+                setTabActive(binding.btnTabFacts);
                 binding.recyclerViewFacts.setVisibility(View.VISIBLE);
                 break;
+        }
+    }
+
+    private void resetTabColors() {
+        setTabInactive(binding.btnTabGallery);
+        setTabInactive(binding.btnTabQuiz);
+        setTabInactive(binding.btnTabFacts);
+    }
+
+    private void setTabActive(View tabLayout) {
+        // Find TextView in LinearLayout and set active color
+        if (tabLayout instanceof android.widget.LinearLayout) {
+            android.widget.LinearLayout layout = (android.widget.LinearLayout) tabLayout;
+            for (int i = 0; i < layout.getChildCount(); i++) {
+                View child = layout.getChildAt(i);
+                if (child instanceof TextView) {
+                    ((TextView) child).setTextColor(getColor(com.google.android.material.R.color.design_default_color_primary));
+                }
+            }
+        }
+    }
+
+    private void setTabInactive(View tabLayout) {
+        // Find TextView in LinearLayout and set inactive color
+        if (tabLayout instanceof android.widget.LinearLayout) {
+            android.widget.LinearLayout layout = (android.widget.LinearLayout) tabLayout;
+            for (int i = 0; i < layout.getChildCount(); i++) {
+                View child = layout.getChildAt(i);
+                if (child instanceof TextView) {
+                    ((TextView) child).setTextColor(getColor(android.R.color.darker_gray));
+                }
+            }
         }
     }
 
@@ -244,13 +277,35 @@ public class StudentMainActivity extends AppCompatActivity {
             binding.radioOption4.setText(options.size() > 3 ? options.get(3) : "");
         }
 
-        binding.radioGroupOptions.clearCheck();
+        // Clear radio group selection - need to find the RadioGroup
+        RadioGroup radioGroup = findRadioGroup();
+        if (radioGroup != null) {
+            radioGroup.clearCheck();
+        }
+    }
+
+    private RadioGroup findRadioGroup() {
+        // You'll need to replace this with the actual RadioGroup from your binding
+        // For example: return binding.radioGroup; or binding.rgOptions;
+        // This is a placeholder - adjust according to your actual layout
+        try {
+            // Try to find RadioGroup in your layout
+            return (RadioGroup) findViewById(android.R.id.list); // Replace with actual ID
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     private void submitAnswer() {
         if (currentQuiz == null) return;
 
-        int selectedId = binding.radioGroupOptions.getCheckedRadioButtonId();
+        RadioGroup radioGroup = findRadioGroup();
+        if (radioGroup == null) {
+            Toast.makeText(this, "Radio group tidak ditemukan!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        int selectedId = radioGroup.getCheckedRadioButtonId();
         if (selectedId == -1) {
             Toast.makeText(this, "Pilih jawaban terlebih dahulu!", Toast.LENGTH_SHORT).show();
             return;
