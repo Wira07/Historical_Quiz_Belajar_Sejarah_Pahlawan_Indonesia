@@ -228,10 +228,22 @@ public class StudentMainActivity extends AppCompatActivity {
 
     private void displayQuiz(Quiz quiz) {
         binding.tvQuizQuestion.setText(quiz.getQuestion());
-        binding.radioOption1.setText(quiz.getOptions()[0]);
-        binding.radioOption2.setText(quiz.getOptions()[1]);
-        binding.radioOption3.setText(quiz.getOptions()[2]);
-        binding.radioOption4.setText(quiz.getOptions()[3]);
+
+        // UPDATED: Use List<String> instead of String[]
+        List<String> options = quiz.getOptions();
+        if (options.size() >= 4) {
+            binding.radioOption1.setText(options.get(0));
+            binding.radioOption2.setText(options.get(1));
+            binding.radioOption3.setText(options.get(2));
+            binding.radioOption4.setText(options.get(3));
+        } else {
+            // Handle case where there are fewer than 4 options
+            binding.radioOption1.setText(options.size() > 0 ? options.get(0) : "");
+            binding.radioOption2.setText(options.size() > 1 ? options.get(1) : "");
+            binding.radioOption3.setText(options.size() > 2 ? options.get(2) : "");
+            binding.radioOption4.setText(options.size() > 3 ? options.get(3) : "");
+        }
+
         binding.radioGroupOptions.clearCheck();
     }
 
@@ -260,8 +272,13 @@ public class StudentMainActivity extends AppCompatActivity {
             }
             Toast.makeText(this, "Benar! +50 poin", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "Salah! Jawaban yang benar: " +
-                    currentQuiz.getOptions()[currentQuiz.getCorrectAnswer()], Toast.LENGTH_LONG).show();
+            // UPDATED: Use List.get() instead of array indexing
+            List<String> options = currentQuiz.getOptions();
+            String correctAnswerText = "Invalid";
+            if (currentQuiz.getCorrectAnswer() >= 0 && currentQuiz.getCorrectAnswer() < options.size()) {
+                correctAnswerText = options.get(currentQuiz.getCorrectAnswer());
+            }
+            Toast.makeText(this, "Salah! Jawaban yang benar: " + correctAnswerText, Toast.LENGTH_LONG).show();
         }
 
         // Load next quiz

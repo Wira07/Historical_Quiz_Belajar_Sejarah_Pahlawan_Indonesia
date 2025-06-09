@@ -9,31 +9,41 @@ import java.util.List;
 public class Quiz {
     private String id;
     private String question;
-    private String[] options;
+    private List<String> options; // CHANGED: Use List<String> instead of String[]
     private int correctAnswer; // Index of the correct option
     private String heroId;
     private long timestamp;
 
     // Default constructor for Firestore (REQUIRED)
     public Quiz() {
+        this.options = new ArrayList<>(); // Initialize as empty list
         this.heroId = "";
         this.timestamp = System.currentTimeMillis();
     }
 
-    // Constructor used to create a new quiz
+    // Constructor used to create a new quiz (accepting String[] for convenience)
     public Quiz(String question, String[] options, int correctAnswer) {
         this.question = question;
-        this.options = options;
+        this.options = options != null ? Arrays.asList(options) : new ArrayList<>();
+        this.correctAnswer = correctAnswer;
+        this.heroId = "";
+        this.timestamp = System.currentTimeMillis();
+    }
+
+    // Constructor accepting List<String>
+    public Quiz(String question, List<String> options, int correctAnswer) {
+        this.question = question;
+        this.options = options != null ? new ArrayList<>(options) : new ArrayList<>();
         this.correctAnswer = correctAnswer;
         this.heroId = "";
         this.timestamp = System.currentTimeMillis();
     }
 
     // Full constructor
-    public Quiz(String id, String question, String[] options, int correctAnswer, String heroId) {
+    public Quiz(String id, String question, List<String> options, int correctAnswer, String heroId) {
         this.id = id;
         this.question = question;
-        this.options = options;
+        this.options = options != null ? new ArrayList<>(options) : new ArrayList<>();
         this.correctAnswer = correctAnswer;
         this.heroId = heroId != null ? heroId : "";
         this.timestamp = System.currentTimeMillis();
@@ -59,31 +69,31 @@ public class Quiz {
         this.question = question;
     }
 
-    // FIXED: Use List<String> for Firestore compatibility instead of String[]
+    // PRIMARY: Use List<String> for Firestore compatibility
     @PropertyName("options")
-    public List<String> getOptionsAsList() {
-        if (options != null) {
-            return Arrays.asList(options);
-        }
-        return new ArrayList<>();
+    public List<String> getOptions() {
+        return options != null ? options : new ArrayList<>();
     }
 
     @PropertyName("options")
-    public void setOptionsAsList(List<String> optionsList) {
-        if (optionsList != null) {
-            this.options = optionsList.toArray(new String[0]);
+    public void setOptions(List<String> options) {
+        this.options = options != null ? new ArrayList<>(options) : new ArrayList<>();
+    }
+
+    // CONVENIENCE: Array version for backward compatibility
+    public String[] getOptionsAsArray() {
+        if (options != null && !options.isEmpty()) {
+            return options.toArray(new String[0]);
+        }
+        return new String[0];
+    }
+
+    public void setOptionsFromArray(String[] optionsArray) {
+        if (optionsArray != null) {
+            this.options = new ArrayList<>(Arrays.asList(optionsArray));
         } else {
-            this.options = new String[0];
+            this.options = new ArrayList<>();
         }
-    }
-
-    // Keep the array version for backward compatibility
-    public String[] getOptions() {
-        return options;
-    }
-
-    public void setOptions(String[] options) {
-        this.options = options;
     }
 
     @PropertyName("correctAnswer")
@@ -122,11 +132,11 @@ public class Quiz {
     }
 
     public boolean hasValidOptions() {
-        return options != null && options.length >= 2;
+        return options != null && options.size() >= 2;
     }
 
     public boolean hasValidCorrectAnswer() {
-        return correctAnswer >= 0 && options != null && correctAnswer < options.length;
+        return correctAnswer >= 0 && options != null && correctAnswer < options.size();
     }
 
     public boolean isValid() {
@@ -135,7 +145,7 @@ public class Quiz {
 
     public String getCorrectAnswerText() {
         if (hasValidCorrectAnswer()) {
-            return options[correctAnswer];
+            return options.get(correctAnswer);
         }
         return "Invalid";
     }
@@ -145,7 +155,7 @@ public class Quiz {
         return "Quiz{" +
                 "id='" + id + '\'' +
                 ", question='" + question + '\'' +
-                ", options=" + (options != null ? Arrays.toString(options) : null) +
+                ", options=" + options +
                 ", correctAnswer=" + correctAnswer +
                 ", heroId='" + heroId + '\'' +
                 ", timestamp=" + timestamp +

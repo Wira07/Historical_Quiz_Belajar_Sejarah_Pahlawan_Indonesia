@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="56dp"
+    android:height="56dp"
+    android:viewportWidth="56"
+    android:viewportHeight="56">
+
+    <!-- Admin Avatar Icon -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M28,6c-3.31,0 -6,2.69 -6,6s2.69,6 6,6s6,-2.69 6,-6S31.31,6 28,6zM28,44c-6.63,0 -12.4,-3.36 -15.78,-8.46C15.05,32.62 21.13,30 28,30s12.95,2.62 15.78,5.54C40.4,40.64 34.63,44 28,44z"/>
+
+    <!-- Crown decoration -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M20,8 L22,4 L24,8 L26,4 L28,8 L30,4 L32,8 L34,4 L36,8 L32,12 L24,12 Z"
+        android:alpha="0.8"/>
+</vector>

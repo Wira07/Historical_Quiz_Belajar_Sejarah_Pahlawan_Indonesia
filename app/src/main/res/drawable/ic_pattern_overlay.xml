@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Geometric Pattern -->
+    <group android:alpha="0.1">
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M0,0 L50,50 L0,100 L50,150 L0,200 L200,200 L200,0 Z" />
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M200,0 L150,50 L200,100 L150,150 L200,200 L0,200 L0,0 Z" />
+
+        <!-- Circle with radius 30 at center (100,100) -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M130,100a30,30 0 1,0 -60,0a30,30 0 1,0 60,0z"/>
+
+        <!-- Circle with radius 15 at center (50,50) -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M65,50a15,15 0 1,0 -30,0a15,15 0 1,0 30,0z"/>
+
+        <!-- Circle with radius 15 at center (150,150) -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M165,150a15,15 0 1,0 -30,0a15,15 0 1,0 30,0z"/>
+    </group>
+</vector>

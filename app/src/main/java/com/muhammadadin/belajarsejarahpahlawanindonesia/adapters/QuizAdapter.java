@@ -87,24 +87,26 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
                     tvQuestion.setText(quiz.getQuestion() != null ? quiz.getQuestion() : "No question available");
                 }
 
-                // Set options
+                // Set options - FIXED: Handle List<String> instead of String[]
                 if (tvOptions != null && quiz.getOptions() != null) {
                     StringBuilder optionsText = new StringBuilder();
-                    String[] options = quiz.getOptions();
+                    List<String> options = quiz.getOptions(); // Changed from String[] to List<String>
 
-                    for (int i = 0; i < options.length; i++) {
+                    for (int i = 0; i < options.size(); i++) { // Changed from options.length to options.size()
                         if (i > 0) optionsText.append("\n");
-                        optionsText.append((char)('A' + i)).append(". ").append(options[i]);
+                        optionsText.append((char)('A' + i)).append(". ").append(options.get(i)); // Changed from options[i] to options.get(i)
                     }
 
                     tvOptions.setText(optionsText.toString());
                 }
 
-                // Set correct answer
+                // Set correct answer - FIXED: Handle List<String> instead of String[]
                 if (tvCorrectAnswer != null && quiz.getOptions() != null) {
                     int correctIndex = quiz.getCorrectAnswer();
-                    if (correctIndex >= 0 && correctIndex < quiz.getOptions().length) {
-                        String correctAnswerText = "Correct: " + (char)('A' + correctIndex) + ". " + quiz.getOptions()[correctIndex];
+                    List<String> options = quiz.getOptions(); // Changed from String[] to List<String>
+
+                    if (correctIndex >= 0 && correctIndex < options.size()) { // Changed from options.length to options.size()
+                        String correctAnswerText = "Correct: " + (char)('A' + correctIndex) + ". " + options.get(correctIndex); // Changed from options[correctIndex] to options.get(correctIndex)
                         tvCorrectAnswer.setText(correctAnswerText);
                     } else {
                         tvCorrectAnswer.setText("Correct answer: Invalid");

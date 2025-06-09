@@ -199,19 +199,25 @@ public class ManageQuizzesActivity extends AppCompatActivity {
             // Parse options - handle both List and Array formats
             if (data.containsKey("options")) {
                 Object optionsObj = data.get("options");
-                String[] options = null;
+                List<String> optionsList = null;
 
                 if (optionsObj instanceof List) {
-                    List<?> optionsList = (List<?>) optionsObj;
-                    options = new String[optionsList.size()];
-                    for (int i = 0; i < optionsList.size(); i++) {
-                        options[i] = String.valueOf(optionsList.get(i));
+                    // If it's already a List, cast it directly
+                    List<?> rawList = (List<?>) optionsObj;
+                    optionsList = new ArrayList<>();
+                    for (Object item : rawList) {
+                        optionsList.add(String.valueOf(item));
                     }
                 } else if (optionsObj instanceof String[]) {
-                    options = (String[]) optionsObj;
+                    // If it's a String array, convert to List
+                    String[] optionsArray = (String[]) optionsObj;
+                    optionsList = Arrays.asList(optionsArray);
                 }
 
-                quiz.setOptions(options);
+                // Set the options as List<String>
+                if (optionsList != null) {
+                    quiz.setOptions(optionsList);
+                }
             }
 
             // Parse correctAnswer
@@ -252,15 +258,39 @@ public class ManageQuizzesActivity extends AppCompatActivity {
     }
 
     private void addSampleQuiz() {
-        Log.d(TAG, "Adding sample quiz...");
+        Log.d(TAG, "Adding sample quizzes...");
 
-        // Example of adding a quiz with proper error handling
-        long timestamp = System.currentTimeMillis();
-        String question = "Siapa yang dikenal sebagai Bapak Proklamator Indonesia? (" + timestamp + ")";
-        String[] options = {"Soekarno", "Mohammad Hatta", "Sutan Sjahrir", "Ki Hajar Dewantara"};
-        int correctAnswer = 0; // Index 0 = "Soekarno"
+        // Quiz 1: Tentang Proklamator
+        String question1 = "Siapa yang dikenal sebagai Bapak Proklamator Indonesia?";
+        String[] options1 = {"Soekarno", "Mohammad Hatta", "Sutan Sjahrir", "Ki Hajar Dewantara"};
+        int correctAnswer1 = 0; // Index 0 = "Soekarno"
+        addQuizToFirestore(question1, options1, correctAnswer1);
 
-        addQuizToFirestore(question, options, correctAnswer);
+        // Quiz 2: Tentang Pahlawan Wanita
+        String question2 = "Siapa pahlawan wanita yang dikenal sebagai 'Ibu Kartini dari Sumatera'?";
+        String[] options2 = {"Cut Nyak Dien", "Rohana Kudus", "Martha Christina Tiahahu", "Dewi Sartika"};
+        int correctAnswer2 = 1; // Index 1 = "Rohana Kudus"
+        addQuizToFirestore(question2, options2, correctAnswer2);
+
+        // Quiz 3: Tentang Perjuangan Kemerdekaan
+        String question3 = "Kapan Indonesia memproklamasikan kemerdekaannya?";
+        String[] options3 = {"16 Agustus 1945", "17 Agustus 1945", "18 Agustus 1945", "19 Agustus 1945"};
+        int correctAnswer3 = 1; // Index 1 = "17 Agustus 1945"
+        addQuizToFirestore(question3, options3, correctAnswer3);
+
+        // Quiz 4: Tentang Pahlawan Nasional
+        String question4 = "Siapa yang dijuluki 'Si Singamangaraja XII' dan merupakan pahlawan dari Sumatera Utara?";
+        String[] options4 = {"Tuanku Imam Bonjol", "Sultan Hasanuddin", "Sisingamangaraja XII", "Pangeran Diponegoro"};
+        int correctAnswer4 = 2; // Index 2 = "Sisingamangaraja XII"
+        addQuizToFirestore(question4, options4, correctAnswer4);
+
+        // Quiz 5: Tentang Pendidikan
+        String question5 = "Siapa yang dikenal sebagai 'Bapak Pendidikan Nasional Indonesia'?";
+        String[] options5 = {"Ki Hajar Dewantara", "Dr. Wahidin Sudirohusodo", "Mohammad Sjafei", "Ki Hadjar Dewantoro"};
+        int correctAnswer5 = 0; // Index 0 = "Ki Hajar Dewantara"
+        addQuizToFirestore(question5, options5, correctAnswer5);
+
+        Toast.makeText(this, "Adding 5 different quiz questions...", Toast.LENGTH_SHORT).show();
     }
 
     private void addQuizToFirestore(String question, String[] options, int correctAnswer) {
